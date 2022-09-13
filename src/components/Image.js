@@ -4,8 +4,9 @@ import PropTypes from "prop-types"
 import {Context} from "../Context"
 
 export default function Image(props){
-    const {toggleFavorite} = React.useContext(Context)
+    const {toggleFavorite, addToCart, cartItems} = React.useContext(Context)
     const [hovered, setHovered] = React.useState(false)
+    const isInCart = (cartItems.find(item => item.id === props.img.id)) ? true : false
 
     const heartIconClass = props.img.isFavorite ? "ri-heart-fill" : "ri-heart-line"
     const heartIcon = (hovered || props.img.isFavorite) && 
@@ -13,8 +14,13 @@ export default function Image(props){
             className={`${heartIconClass} favorite drop-shadow`}
             onClick={() => toggleFavorite(props.img.id)}    
         />
-    const cartIcon = hovered &&
-        <i className="ri-add-circle-line cart drop-shadow" />
+
+    const cartIconClass = isInCart ? "ri-shopping-cart-fill" : "ri-add-circle-line" 
+    const cartIcon = (hovered || isInCart) &&
+        <i
+            className={`${cartIconClass} cart drop-shadow`}
+            onClick={() => addToCart(props.img)}
+        />
 
 
     return (
@@ -25,7 +31,7 @@ export default function Image(props){
         >
             {heartIcon}
             {cartIcon}
-            <img className="image-grid rounded-3 shadow-lg" src={props.img.url} />
+            <img className="image-grid rounded-3 shadow-lg" src={props.img.url} alt=""/>
         </div>
     )
 }
