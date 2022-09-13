@@ -10,12 +10,10 @@ export default function App(){
         <>
             <Header />
 
-            <main className="p-3">
-                <Routes>
-                    <Route exact path="/" element={<Photos />} />
-                    <Route exact path="/cart" element={<Cart />} />
-                </Routes>
-            </main>
+            <Routes>
+                <Route exact path="/" element={<Photos />} />
+                <Route exact path="/cart" element={<Cart />} />
+            </Routes>
         </>
     )
 }
