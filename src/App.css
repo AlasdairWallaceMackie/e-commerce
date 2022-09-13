@@ -78,7 +78,7 @@ img.image-grid {
 
 .favorite {
     color: var(--red);
-    font-size: 1.2rem;
+    font-size: 2rem;
     position: absolute;
     top: 5px;
     left: 5px;
@@ -96,11 +96,16 @@ img.image-grid {
 
 .cart {
     color: var(--blue);
-    font-size: 1.2rem;
+    font-size: 2rem;
     position: absolute;
     top: 5px;
     right: 5px;
     cursor: pointer;
+}
+
+.cart-img{
+    width: 35%;
+    margin: 1rem
 }
 
 .drop-shadow{
