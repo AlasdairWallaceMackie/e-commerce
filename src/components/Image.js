@@ -2,10 +2,11 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import {Context} from "../Context"
+import useHover from "../hooks/useHover"
 
 export default function Image(props){
     const {toggleFavorite, addToCart, cartItems} = React.useContext(Context)
-    const [hovered, setHovered] = React.useState(false)
+    const [hovered, hoverRef] = useHover()
     const isInCart = (cartItems.find(item => item.id === props.img.id)) ? true : false
 
     const heartIconClass = props.img.isFavorite ? "ri-heart-fill" : "ri-heart-line"
@@ -26,8 +27,7 @@ export default function Image(props){
     return (
         <div
             className={`${props.className} image-container`}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
+            ref={hoverRef}
         >
             {heartIcon}
             {cartIcon}

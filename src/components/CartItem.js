@@ -1,11 +1,12 @@
 import React from "react"
 
 import {Context} from "../Context"
+import useHover from "../hooks/useHover"
 
 export default function CartItem(props){
     const {removeFromCart} = React.useContext(Context)
     const [showRemoveConfirm, setShowRemoveConfirm] = React.useState(false)
-    const [trashIconHovered, setTrashIconHovered] = React.useState(false)
+    const [trashIconHovered, ref] = useHover()
 
     const removeConfirmation = (
         <div className="position-absolute bg-light text-center p-3 rounded shadow border border-2">
@@ -37,8 +38,7 @@ export default function CartItem(props){
                 <i 
                     className={trashIconHovered ? "ri-delete-bin-fill" : "ri-delete-bin-line"}
                     onClick={() => setShowRemoveConfirm(true)}
-                    onMouseEnter={() => setTrashIconHovered(true)}
-                    onMouseLeave={() => setTrashIconHovered(false)}
+                    ref={ref}
                 />
                 <img 
                     className={`rounded shadow ${showRemoveConfirm && "blur"}`}
