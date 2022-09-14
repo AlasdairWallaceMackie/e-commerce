@@ -63,7 +63,8 @@ div.order-button > button:disabled {
 
 .cart-item img {
     margin-right: auto;
-    margin-left: 10px;   
+    margin-left: 10px;
+    width: 35%;
 }
 
 img.image-grid {
@@ -123,6 +124,10 @@ img.image-grid {
 .big {
     grid-column: span 2;
     grid-row: span 2;
+}
+
+.blur{
+    filter: blur(3px)
 }
 
 a {
