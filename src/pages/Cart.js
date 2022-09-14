@@ -1,10 +1,11 @@
 import React from "react"
-import {Context} from "../Context"
 
+import {Context} from "../Context"
 import CartItem from "../components/CartItem"
 
 export default function Cart(){
-    const {cartItems} = React.useContext(Context)
+    const {cartItems, emptyCart} = React.useContext(Context)
+    const [orderPlaced, setOrderPlaced] = React.useState(false)
 
     const cartElements = cartItems.map(item => (
         <>
@@ -17,9 +18,43 @@ export default function Cart(){
         </>
     ))
 
-    const checkOutButton = <div className="text-center"><button className="btn btn-lg btn-success shadow">Place Order</button></div>
+    const spinner = (
+        <div className="spinner-border spinner-border-sm text-light" role="status">
+            <span className="visually-hidden">Loading...</span>
+        </div>
+    )
+
+    const checkOutButton = (
+        <div className="text-center">
+            <button className="btn btn-lg btn-success shadow" onClick={placeOrder}>
+                {orderPlaced ? "Ordering..." : "Place Order"}
+                {orderPlaced && spinner}
+            </button>
+        </div>)
 
     const totalCost = (5.99 * cartItems.length).toLocaleString("en-us", {style: "currency", currency: "USD"})
+
+    function placeOrder(){
+        if (cartItems.length){
+            setOrderPlaced(true)
+        }
+        else
+            alert("Cart is empty")
+    }
+
+    React.useEffect(() => {
+        if (orderPlaced){
+            const timer = setTimeout(() => {
+                setOrderPlaced(false)
+                window.location.href = "/success"
+                emptyCart()
+    
+            }, 2000)
+            return () => clearTimeout(timer)
+        }
+    }, [orderPlaced])
+
+    console.log(cartItems)
 
     return (
         <main className="cart-page container-fluid col-lg-8 p-5">
