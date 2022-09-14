@@ -10,16 +10,20 @@ function ContextProvider(props){
         setAllPhotos(prevState => prevState.map(photo => (
             {
                 ...photo,
-                isFavorite: photo.id === id ? !photo.isFavorite : photo.isFavorite
+                isFavorite: photo.id === id ? !photo.isFavorite : photo.isFavorite,
             }
         )))
     }
 
     function addToCart(newItem){
         if (cartItems.some(item => item.id === newItem.id))
-            setCartItems(prevCart => prevCart.filter(item => item.id !== newItem.id))
+            removeFromCart(newItem.id)
         else
             setCartItems(prevCart => [...prevCart, newItem])
+    }
+
+    function removeFromCart(id){
+        setCartItems(prevCart => prevCart.filter(item => item.id !== id))
     }
 
     React.useEffect(() => {
@@ -29,7 +33,7 @@ function ContextProvider(props){
     }, [])
 
     return (
-        <Context.Provider value={{allPhotos, toggleFavorite, cartItems, addToCart}}>
+        <Context.Provider value={{allPhotos, toggleFavorite, cartItems, addToCart, removeFromCart}}>
             {props.children}
         </Context.Provider>
     )
