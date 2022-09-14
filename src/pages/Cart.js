@@ -54,13 +54,11 @@ export default function Cart(){
         }
     }, [orderPlaced])
 
-    console.log(cartItems)
-
     return (
         <main className="cart-page container-fluid col-lg-8 p-5">
             <h1 className="mb-4">Your Cart</h1>
-            {checkOutButton}
-            {cartElements.length ? cartElements : <i>Your cart is empty</i>}
+            {cartItems.length > 0 && checkOutButton}
+            {cartElements.length ? cartElements : <p className="fst-italic my-4">Your cart is empty</p>}
             <div className="total-cost">
                 <h3 className="fw-bold">Total: {totalCost}</h3>
             </div>
