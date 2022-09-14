@@ -5,6 +5,7 @@ import {Context} from "../Context"
 export default function CartItem(props){
     const {removeFromCart} = React.useContext(Context)
     const [showRemoveConfirm, setShowRemoveConfirm] = React.useState(false)
+    const [trashIconHovered, setTrashIconHovered] = React.useState(false)
 
     const removeConfirmation = (
         <div className="position-absolute bg-light text-center p-3 rounded shadow border border-2">
@@ -33,7 +34,12 @@ export default function CartItem(props){
     return (
         <>
             <div className="cart-item">
-                <i className="ri-delete-bin-line" onClick={() => setShowRemoveConfirm(true)} />
+                <i 
+                    className={trashIconHovered ? "ri-delete-bin-fill" : "ri-delete-bin-line"}
+                    onClick={() => setShowRemoveConfirm(true)}
+                    onMouseEnter={() => setTrashIconHovered(true)}
+                    onMouseLeave={() => setTrashIconHovered(false)}
+                />
                 <img 
                     className={`rounded shadow ${showRemoveConfirm && "blur"}`}
                     src={props.img.url} 
