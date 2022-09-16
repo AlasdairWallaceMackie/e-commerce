@@ -55,14 +55,17 @@ export default function Cart(){
     }, [orderPlaced])
 
     return (
-        <main className="cart-page container-fluid col-lg-8 p-5">
+        <main className="cart-page container-fluid col-md-8 p-5">
             <h1 className="mb-4">Your Cart</h1>
             {cartItems.length > 0 && checkOutButton}
+
+            <hr className="hr"></hr>
+
             {cartElements.length ? cartElements : <p className="fst-italic my-4">Your cart is empty</p>}
             <div className="total-cost">
                 <h3 className="fw-bold">Total: {totalCost}</h3>
             </div>
-            {cartItems.length > 3 && checkOutButton}
+            {cartItems.length > 2 && checkOutButton}
         </main>
     )
 }
